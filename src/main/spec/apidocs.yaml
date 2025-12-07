@@ -1,0 +1,340 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/tedtalksApi": {
+      "get": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "getAll",
+        "summary": "GetAll tedtalks available in your database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TedTalk"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "create",
+        "summary": "Create a tedtalks ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TedTalk"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TedTalk"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tedtalksApi/search": {
+      "post": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "search",
+        "summary": "Search tedtalks based on the filter.filter will be exact match and will be applied by AND clause.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TedTalkFilterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TedTalk"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tedtalksApi/patch-tedTalk/{id}": {
+      "patch": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "updateTalk",
+        "summary": "patch tedtalk by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TedTalk"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TedTalk"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tedtalksApi/{id}": {
+      "get": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "getById",
+        "summary": "Get tedtalk available in your database by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TedTalk"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "delete",
+        "summary": "Delete tedtalk available in your database byId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/tedtalksApi/influentialEachYear": {
+      "get": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "mostInfluential",
+        "summary": "GetAll most influential tedtalk for all available years",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TedTalk"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tedtalksApi/influential/{year}": {
+      "get": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "getMostInfluentialByYear",
+        "summary": "GetAll most influential tedtalk for specified year",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TedTalk"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tedtalksApi/import-csv": {
+      "get": {
+        "tags": [
+          "ted-talk-controller"
+        ],
+        "operationId": "importCsv",
+        "summary": "Load csv file in DB",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TedTalk"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TedTalk": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "views": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "likes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "link": {
+            "type": "string"
+          },
+          "influenceScore": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TedTalkFilterRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}
