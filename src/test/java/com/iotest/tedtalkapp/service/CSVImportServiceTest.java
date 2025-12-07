@@ -47,11 +47,10 @@ class CSVImportServiceTest {
             when(repo.save(row1)).thenReturn(Mono.just(row1));
             when(repo.save(row2)).thenReturn(Mono.just(row2));
 
-            Flux<TedTalk> result = service.importCsv();
+            Mono<Long> result = service.importCsv();
 
             StepVerifier.create(result)
-                    .expectNext(row1)
-                    .expectNext(row2)
+                    .expectNext(2L)
                     .verifyComplete();
 
             verify(repo, times(2)).save(any(TedTalk.class));

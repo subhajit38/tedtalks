@@ -16,8 +16,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "getAll",
         "summary": "GetAll tedtalks available in your database",
+        "operationId": "getAll",
         "responses": {
           "200": {
             "description": "OK",
@@ -38,13 +38,13 @@
         "tags": [
           "ted-talk-controller"
         ],
+        "summary": "Create a tedtalk ",
         "operationId": "create",
-        "summary": "Create a tedtalks ",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TedTalk"
+                "$ref": "#/components/schemas/TedTalkRequest"
               }
             }
           },
@@ -69,8 +69,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "search",
         "summary": "Search tedtalks based on the filter.filter will be exact match and will be applied by AND clause.",
+        "operationId": "search",
         "requestBody": {
           "content": {
             "application/json": {
@@ -103,8 +103,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "updateTalk",
         "summary": "patch tedtalk by id",
+        "operationId": "updateTalk",
         "parameters": [
           {
             "name": "id",
@@ -120,7 +120,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TedTalk"
+                "$ref": "#/components/schemas/TedTalkRequest"
               }
             }
           },
@@ -145,8 +145,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "getById",
         "summary": "Get tedtalk available in your database by Id",
+        "operationId": "getById",
         "parameters": [
           {
             "name": "id",
@@ -174,8 +174,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "delete",
         "summary": "Delete tedtalk available in your database byId",
+        "operationId": "delete",
         "parameters": [
           {
             "name": "id",
@@ -198,8 +198,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "mostInfluential",
         "summary": "GetAll most influential tedtalk for all available years",
+        "operationId": "mostInfluential",
         "responses": {
           "200": {
             "description": "OK",
@@ -222,8 +222,8 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "getMostInfluentialByYear",
         "summary": "GetAll most influential tedtalk for specified year",
+        "operationId": "getMostInfluentialByYear",
         "parameters": [
           {
             "name": "year",
@@ -254,28 +254,16 @@
         "tags": [
           "ted-talk-controller"
         ],
-        "operationId": "importCsv",
         "summary": "Load csv file in DB",
-        "parameters": [
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "operationId": "importCsv",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TedTalk"
-                  }
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             }
@@ -286,6 +274,32 @@
   },
   "components": {
     "schemas": {
+      "TedTalkRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "views": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "likes": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
       "TedTalk": {
         "type": "object",
         "properties": {

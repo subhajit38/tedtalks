@@ -31,14 +31,6 @@ mvn clean install
 
 java -jar target/tedtalks-1.0-SNAPSHOT.jar
 
-## verify application is UP ?
-
-java -jar tedtalks-1.0-SNAPSHOT.jar
-
-Check resposne:
-
-{"status":"UP"}
-
 ## Swagger UI
 http://localhost:8080/webjars/swagger-ui/index.html#/
 
